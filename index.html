@@ -48,32 +48,32 @@
 
 <h2>FAQs</h2>
 
-<em>Who found this bug?</em>
+<h5><em>Who found this bug?</em></h5>
 <p><a href="https://hackerone.com/stewie">Stewie</a> found the initial bug, and <a href="https://twitter.com/__sl1m">Nikolay Ermishkin</a> from the Mail.Ru Security Team found additional issues, including the RCE.</p>
 
-<em>Will you share the exploit with me?</em>
+<h5><em>Will you share the exploit with me?</em></h5>
 <p>No. We would like to give people a chance to patch before it is more widely available. The exploit is trivial, so we expect it to be available within hours of this post. Updates and PoC will eventually be available here.</p>
 
-<em>What are "magic bytes"?</em>
+<h5><em>What are "magic bytes"?</em></h5>
 <p>The first few bytes of a file can often used to identify the type of file. Some examples are GIF images, which start with the hex bytes <strong>"47 49 46 38"</strong>, and JPEG images, which start with <strong>"FF D8"</strong>. <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">This list</a> on Wikipedia has the magic bytes for most common file types.</p>
 
 
-<em>Why are you disclosing a vulnerability like this?</em>
+<h5><em>Why are you disclosing a vulnerability like this?</em></h5>
 <p>We have collectively determined that these vulnerabilities are available to individuals other than the person(s) who discovered them. An unknowable number of people having access to these vulnerabilities makes this a critical issue for everyone using this software. <a href="https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=29588">ImageMagick also disclosed this on their forum a few hours ago</a>.</p>
 
-<em>How well-tested are these mitigations?</em>
+<h5><em>How well-tested are these mitigations?</em></h5>
 <p>They are effective against all of the exploit samples we’ve seen, but we cannot guarantee they will eliminate all vectors of attack.</p>
 
-<em>Are there other ways to mitigate?</em>
+<h5><em>Are there other ways to mitigate?</em></h5>
 <p>Sandboxing ImageMagick is worth investigating, but we are not providing specific instructions for doing this.</p>
 
-<em>Why is this post so short?</em>
+<h5><em>Why is this post so short?</em></h5>
 <p>We did not find this vulnerability ourselves. We understand the mechanisms involved, but credit for finding this vulnerability should go to the researcher(s).</p>
 
-<em>How can I contact you?</em>
+<h5><em>How can I contact you?</em></h5>
 <p>imagetragick@gmail.com</p>
 
-<em>Who is "we"?</em>
+<h5><em>Who is "we"?</em></h5>
 <p>Us.</p>
 
 <h2>POCs</h2>
@@ -92,9 +92,9 @@ The POCs will be released at a later date <a href="https://github.com/ImageTragi
 </div>
 <div class="col-md-12">
 <footer class="footer">
-</footer>
+</footergit>
 </div>
-</div>
+</div> <!-- container -->
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
