@@ -5,22 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <title>Image Tragick</title>
+    <title>ImageTragick</title>
 </head>
 <body>
 <div class="container">
 
 <div class="page-header">
-<h1 id="navbar">Image Tragick</h1>
+<h1 id="navbar">ImageTragick</h1>
 </div>
 <div class="col-md-8">
 
-<h2>TODO</h2>
+<h2>ImageMagick Is On Fire — CVE-2016–3714</h2>
+<h4><a href="https://medium.com/@rhuber/imagemagick-is-on-fire-cve-2016-3714-379faf762247#.n6izn91pd">Inital blog post</a></h4>
 
-<a href="https://github.com/ImageTragick/PoCs" >POCs</a>
+<h3>TL;DR</h3>
+<p>There are multiple vulnerabilities in <a href="http://www.imagemagick.org/">ImageMagick</a>, a package commonly used by web services to process images. One of the vulnerabilities can lead to remote code execution (RCE) if you process user submitted images. The exploit for this vulnerability is being used in the wild.</p>
 
+<p>A number of image processing plugins depend on the ImageMagick library, including, but not limited to, PHP’s imagick, Ruby’s rmagick and paperclip, and nodejs’s imagemagick.</p>
 
-<p>Below is a minimal polixy.xml to prevent the known attacks.</p>
+<p>If you use ImageMagick or an affected library, we recommend you mitigate the known vulnerabilities by doing at least one these two things (but preferably both!):</p>
+<ol>
+<li>rify that all image files begin with the expected <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">"magic bytes"</a> corresponding to the image file types you support before sending them to ImageMagick for processing. (see FAQ for more info)</li>
+<li>Use a <a href="http://www.imagemagick.org/script/resources.php">policy file</a> to disable the vulnerable ImageMagick coders. The global policy for ImageMagick is usually found in “/etc/ImageMagick”. The below policy.xml example will disable the coders EPHEMERAL, URL, MVG, and MSL.</li>
+</ol>
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">policy.xml</h3>
@@ -28,17 +35,53 @@
   <div class="panel-body">
   <pre>
 &lt;policymap&gt;
-  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;MVG&quot;/&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;EPHEMERAL&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;URL&quot; /&gt;
   &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;HTTPS&quot; /&gt;
-  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;URL&quot; /&gt; 
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;MVG&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;MSL&quot; /&gt;
 &lt;/policymap&gt;
 </pre>
   </div>
 </div>
 
 
-
 <h2>FAQs</h2>
+
+<em>Who found this bug?</em>
+<p><a href="https://hackerone.com/stewie">Stewie</a> found the initial bug, and <a href="https://twitter.com/__sl1m">Nikolay Ermishkin</a> from the Mail.Ru Security Team found additional issues, including the RCE.</p>
+
+<em>Will you share the exploit with me?</em>
+<p>No. We would like to give people a chance to patch before it is more widely available. The exploit is trivial, so we expect it to be available within hours of this post. Updates and PoC will eventually be available here.</p>
+
+<em>What are "magic bytes"?</em>
+<p>The first few bytes of a file can often used to identify the type of file. Some examples are GIF images, which start with the hex bytes <strong>"47 49 46 38"</strong>, and JPEG images, which start with <strong>"FF D8"</strong>. <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">This list</a> on Wikipedia has the magic bytes for most common file types.</p>
+
+
+<em>Why are you disclosing a vulnerability like this?</em>
+<p>We have collectively determined that these vulnerabilities are available to individuals other than the person(s) who discovered them. An unknowable number of people having access to these vulnerabilities makes this a critical issue for everyone using this software. <a href="https://www.imagemagick.org/discourse-server/viewtopic.php?f=4&t=29588">ImageMagick also disclosed this on their forum a few hours ago</a>.</p>
+
+<em>How well-tested are these mitigations?</em>
+<p>They are effective against all of the exploit samples we’ve seen, but we cannot guarantee they will eliminate all vectors of attack.</p>
+
+<em>Are there other ways to mitigate?</em>
+<p>Sandboxing ImageMagick is worth investigating, but we are not providing specific instructions for doing this.</p>
+
+<em>Why is this post so short?</em>
+<p>We did not find this vulnerability ourselves. We understand the mechanisms involved, but credit for finding this vulnerability should go to the researcher(s).</p>
+
+<em>How can I contact you?</em>
+<p>imagetragick@gmail.com</p>
+
+<em>Who is "we"?</em>
+<p>Us.</p>
+
+<h2>POCs</h2>
+The POCs will be released at a later date <a href="https://github.com/ImageTragick/PoCs" >here</a>.
+
+
+<a href="https://twitter.com/ImageTragick" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @ImageTragick</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
 </div>
 <div class="col-md-4">
