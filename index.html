@@ -23,7 +23,7 @@
 
 <p>A number of image processing plugins depend on the ImageMagick library, including, but not limited to, PHP’s imagick, Ruby’s rmagick and paperclip, and nodejs’s imagemagick.</p>
 
-<p>If you use ImageMagick or an affected library, we recommend you mitigate the known vulnerabilities by doing at least one these two things (but preferably both!):</p>
+<p>If you use ImageMagick or an affected library, we recommend you mitigate the known vulnerabilities by doing at least one of these two things (but preferably both!):</p>
 <ol>
 <li>Verify that all image files begin with the expected <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">"magic bytes"</a> corresponding to the image file types you support before sending them to ImageMagick for processing. (see FAQ for more info)</li>
 <li>Use a <a href="https://www.imagemagick.org/script/resources.php">policy file</a> to disable the vulnerable ImageMagick coders. The global policy for ImageMagick is usually found in “/etc/ImageMagick”. The below policy.xml example will disable the coders EPHEMERAL, URL, MVG, and MSL.</li>
