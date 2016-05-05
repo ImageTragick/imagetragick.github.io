@@ -13,14 +13,18 @@
 
 <div class="page-header">
 <h1 id="navbar">ImageTragick</h1>
+<i>Make ImageMagick Great Again</i>
 </div>
 <div class="col-md-8">
 
+<i>Updated 5/5</i><br>
+<a href="#policy">Updated Policy Recommendation</a><br>
 <i>Updated 5/4</i><br>
 <a href="#why">What's with the stupid (logo|website|twitter account)?</a><br>
 <a href="#info">Detailed Vulnerability Information</a><br>
+<a href="https://github.com/ImageTragick/PoCs">PoC</a><br>
+<i>Updated 5/3</i><br>
 <a href="#FAQ">FAQs</a><br>
-<a href="https://github.com/ImageTragick/PoCs">PoC</a>
 
 <h2>ImageMagick Is On Fire — CVE-2016–3714</h2>
 
@@ -34,9 +38,9 @@
 <li>Verify that all image files begin with the expected <a href="https://en.wikipedia.org/wiki/List_of_file_signatures">"magic bytes"</a> corresponding to the image file types you support before sending them to ImageMagick for processing. (see <a href="#FAQ">FAQ</a> for more info)</li>
 <li>Use a <a href="https://www.imagemagick.org/script/resources.php">policy file</a> to disable the vulnerable ImageMagick coders. The global policy for ImageMagick is usually found in “/etc/ImageMagick”. The below policy.xml example will disable the coders EPHEMERAL, URL, MVG, and MSL.</li>
 </ol>
-<div class="panel panel-info">
+<div id="policy" class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title">policy.xml</h3>
+    <h3 class="panel-title">policy.xml (updated 5/5)</h3>
   </div>
   <div class="panel-body">
   <pre>
@@ -46,6 +50,10 @@
   &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;HTTPS&quot; /&gt;
   &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;MVG&quot; /&gt;
   &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;MSL&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;TEXT&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;SHOW&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;WIN&quot; /&gt;
+  &lt;policy domain=&quot;coder&quot; rights=&quot;none&quot; pattern=&quot;PLT&quot; /&gt;
 &lt;/policymap&gt;
 </pre>
   </div>
